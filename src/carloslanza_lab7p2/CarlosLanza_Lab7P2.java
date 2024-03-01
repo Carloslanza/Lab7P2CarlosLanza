@@ -1,5 +1,12 @@
 package carloslanza_lab7p2;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
 
     /**
@@ -7,8 +14,6 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
      */
     public CarlosLanza_Lab7P2() {
         initComponents();
-        cmd.setLocationRelativeTo(null);
-        cmd.setVisible(true);
     }
 
     /**
@@ -20,80 +25,250 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cmd = new javax.swing.JDialog();
-        bg_cmd = new javax.swing.JPanel();
-        user_txt = new javax.swing.JLabel();
+        pp_arbol = new javax.swing.JPopupMenu();
+        loadFile_ppItem = new javax.swing.JMenuItem();
+        refreshTrees_ppItem = new javax.swing.JMenuItem();
+        pp_tabla = new javax.swing.JPopupMenu();
+        clearTable_ppItem = new javax.swing.JMenuItem();
+        cmd_tf = new javax.swing.JTextField();
+        btn_enter = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        user_TA = new javax.swing.JTextArea();
+        jTree1 = new javax.swing.JTree();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        file_jmenu = new javax.swing.JMenu();
+        newFile_menuItem = new javax.swing.JMenuItem();
+        importFile_menuItem = new javax.swing.JMenuItem();
+        window_jmenu = new javax.swing.JMenu();
+        clear_jmenu = new javax.swing.JMenu();
+        clearCMD_menuItem = new javax.swing.JMenuItem();
+        clearTable_menuItem = new javax.swing.JMenuItem();
+        refreshTree_menuItem = new javax.swing.JMenuItem();
+        help_jmenu = new javax.swing.JMenu();
+        programStruc_menuItem = new javax.swing.JMenuItem();
+        commands_menuItem = new javax.swing.JMenuItem();
 
-        cmd.setMaximumSize(new java.awt.Dimension(650, 400));
-        cmd.setMinimumSize(new java.awt.Dimension(650, 400));
+        loadFile_ppItem.setText("Load File");
+        pp_arbol.add(loadFile_ppItem);
 
-        bg_cmd.setBackground(new java.awt.Color(0, 0, 0));
+        refreshTrees_ppItem.setText("Refresh Trees");
+        pp_arbol.add(refreshTrees_ppItem);
 
-        user_txt.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        user_txt.setForeground(new java.awt.Color(0, 204, 0));
-        user_txt.setText("$master:");
-
-        jScrollPane1.setBackground(new java.awt.Color(0, 0, 0));
-        jScrollPane1.setBorder(null);
-
-        user_TA.setBackground(new java.awt.Color(0, 0, 0));
-        user_TA.setColumns(20);
-        user_TA.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        user_TA.setForeground(new java.awt.Color(0, 204, 0));
-        user_TA.setRows(5);
-        user_TA.setBorder(null);
-        user_TA.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        jScrollPane1.setViewportView(user_TA);
-
-        javax.swing.GroupLayout bg_cmdLayout = new javax.swing.GroupLayout(bg_cmd);
-        bg_cmd.setLayout(bg_cmdLayout);
-        bg_cmdLayout.setHorizontalGroup(
-            bg_cmdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bg_cmdLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(user_txt)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 552, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
-        );
-        bg_cmdLayout.setVerticalGroup(
-            bg_cmdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bg_cmdLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(bg_cmdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(user_txt))
-                .addContainerGap(306, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout cmdLayout = new javax.swing.GroupLayout(cmd.getContentPane());
-        cmd.getContentPane().setLayout(cmdLayout);
-        cmdLayout.setHorizontalGroup(
-            cmdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg_cmd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        cmdLayout.setVerticalGroup(
-            cmdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg_cmd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        clearTable_ppItem.setText("Clear Table");
+        pp_tabla.add(clearTable_ppItem);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        btn_enter.setText("Enter");
+        btn_enter.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_enterMouseClicked(evt);
+            }
+        });
+
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jTree1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTree1MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTree1);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "id", "name", "category", "price", "aisle", "bin"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
+
+        file_jmenu.setText("File");
+
+        newFile_menuItem.setText("New File");
+        newFile_menuItem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                newFile_menuItemMouseClicked(evt);
+            }
+        });
+        file_jmenu.add(newFile_menuItem);
+
+        importFile_menuItem.setText("Import File");
+        importFile_menuItem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                importFile_menuItemMouseClicked(evt);
+            }
+        });
+        file_jmenu.add(importFile_menuItem);
+
+        jMenuBar1.add(file_jmenu);
+
+        window_jmenu.setText("Window");
+
+        clear_jmenu.setText("Clear");
+
+        clearCMD_menuItem.setText("Clear Command Line");
+        clearCMD_menuItem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clearCMD_menuItemMouseClicked(evt);
+            }
+        });
+        clear_jmenu.add(clearCMD_menuItem);
+
+        clearTable_menuItem.setText("Clear Table");
+        clearTable_menuItem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clearTable_menuItemMouseClicked(evt);
+            }
+        });
+        clear_jmenu.add(clearTable_menuItem);
+
+        window_jmenu.add(clear_jmenu);
+
+        refreshTree_menuItem.setText("Refresh Tree");
+        refreshTree_menuItem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                refreshTree_menuItemMouseClicked(evt);
+            }
+        });
+        window_jmenu.add(refreshTree_menuItem);
+
+        jMenuBar1.add(window_jmenu);
+
+        help_jmenu.setText("Help");
+
+        programStruc_menuItem.setText("Program Structure");
+        help_jmenu.add(programStruc_menuItem);
+
+        commands_menuItem.setText("Commands");
+        help_jmenu.add(commands_menuItem);
+
+        jMenuBar1.add(help_jmenu);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cmd_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_enter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btn_enter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(1, 1, 1))
+                    .addComponent(cmd_tf, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane1))
+                .addGap(11, 11, 11))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_enterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_enterMouseClicked
+        String cmd = cmd_tf.getText();
+        String[] comandos = cmd.split(" ");
+        
+        try {
+            switch (comandos[0]) {
+                case "./load":
+                    cargarTabla(comandos[1]);
+                    break;
+                case "./create":
+                    ingresarProductos(comandos[1]);
+                    break;
+                case "./clear":
+                    limpiarTabla();
+                    break;
+                case "./refresh":
+                    cargarArboles();
+                    break;
+                default: {
+                    JOptionPane.showMessageDialog(null, "Comando inválido");
+                }
+            }
+        } catch(IOException e) {}
+        
+        cmd_tf.setText("");
+    }//GEN-LAST:event_btn_enterMouseClicked
+
+    private void importFile_menuItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_importFile_menuItemMouseClicked
+        String texto = JOptionPane.showInputDialog(null, "Ingrese el archivo a importar: ");
+        try {
+            cargarTabla(texto);
+        } catch (IOException ex) {}
+    }//GEN-LAST:event_importFile_menuItemMouseClicked
+
+    private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
+       if (evt.isMetaDown()) {
+           pp_arbol.show(jTree1, evt.getX(), evt.getY());
+       }
+    }//GEN-LAST:event_jTree1MouseClicked
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        if (evt.isMetaDown()) {
+            pp_tabla.show(jTable1, evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void newFile_menuItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newFile_menuItemMouseClicked
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        if (model.getRowCount() > 0) {
+           String nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre del archivo: ");
+           ingresarProductos(nombre);
+        } else {
+            JOptionPane.showMessageDialog(null, "¡La tabla está vacía!");
+        }
+    }//GEN-LAST:event_newFile_menuItemMouseClicked
+
+    private void clearCMD_menuItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearCMD_menuItemMouseClicked
+        cmd_tf.setText("");
+    }//GEN-LAST:event_clearCMD_menuItemMouseClicked
+
+    private void clearTable_menuItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearTable_menuItemMouseClicked
+        limpiarTabla();
+    }//GEN-LAST:event_clearTable_menuItemMouseClicked
+
+    private void refreshTree_menuItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshTree_menuItemMouseClicked
+        cargarArboles();
+    }//GEN-LAST:event_refreshTree_menuItemMouseClicked
 
     /**
      * @param args the command line arguments
@@ -130,38 +305,53 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
         });
     }
     
-    private void cargarTabla(String cmd) {
-        String[] comandos = cmd.split(" ");
-        if (comandos[0].equals("./load")) {
+    private void cargarTabla(String file) throws IOException {
+        adminProductos = new AdministrarProductos(file);
+        adminProductos.cargarArchivo();
+        
+        ArrayList<Producto> productos = adminProductos.getProductos();
+        
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        
+        for (int i = 1; i < productos.size(); i++) {
+            Producto producto = productos.get(i);
+            Object[] rowData = {
+                producto.getId(),
+                producto.getName(),
+                producto.getCategory(),
+                producto.getPrice(),
+                producto.getAisle(),
+                producto.getBin()
+            };
+            model.addRow(rowData);
+        }
+        
+        jTable1.setModel(model);
+        
+        csvs.add(adminProductos);
+    }
+
+    
+    private void ingresarProductos(String nombre) {
+        ArrayList<Producto> productos = new ArrayList<>();
+        adminProductos = new AdministrarProductos(nombre);
+        
+        
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        
+        for (int i = 0; i < model.getRowCount(); i++) {
             
-        } else {
-            user_TA.setText("");
         }
     }
     
-    private void ingresarProductos(String cmd) {
-        String[] comandos = cmd.split(" ");
-        if (comandos[0].equals("./create")) {
-            
-        } else {
-            user_TA.setText("");
-        }
+    private void limpiarTabla() {
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        model.setRowCount(0);
+        jTable1.setModel(model);
     }
     
-    private void limpiarTabla(String cmd) {
-        if (cmd.equals("./clear")) {
-            
-        } else {
-            user_TA.setText(" ");
-        }
-    }
-    
-    private void cargarArboles(String cmd) {
-        if (cmd.equals("./refresh")) {
-            
-        } else {
-            user_TA.setText(" ");
-        }
+    private void cargarArboles() {
+        
     }
     
     public static boolean validarName(String name) {
@@ -183,10 +373,31 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel bg_cmd;
-    private javax.swing.JDialog cmd;
+    private javax.swing.JButton btn_enter;
+    private javax.swing.JMenuItem clearCMD_menuItem;
+    private javax.swing.JMenuItem clearTable_menuItem;
+    private javax.swing.JMenuItem clearTable_ppItem;
+    private javax.swing.JMenu clear_jmenu;
+    private javax.swing.JTextField cmd_tf;
+    private javax.swing.JMenuItem commands_menuItem;
+    private javax.swing.JMenu file_jmenu;
+    private javax.swing.JMenu help_jmenu;
+    private javax.swing.JMenuItem importFile_menuItem;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea user_TA;
-    private javax.swing.JLabel user_txt;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTree jTree1;
+    private javax.swing.JMenuItem loadFile_ppItem;
+    private javax.swing.JMenuItem newFile_menuItem;
+    private javax.swing.JPopupMenu pp_arbol;
+    private javax.swing.JPopupMenu pp_tabla;
+    private javax.swing.JMenuItem programStruc_menuItem;
+    private javax.swing.JMenuItem refreshTree_menuItem;
+    private javax.swing.JMenuItem refreshTrees_ppItem;
+    private javax.swing.JMenu window_jmenu;
     // End of variables declaration//GEN-END:variables
+
+    private static AdministrarProductos adminProductos = null;
+    private static ArrayList<AdministrarProductos> csvs = new ArrayList<>();
 }

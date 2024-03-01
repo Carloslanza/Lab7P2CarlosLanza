@@ -14,6 +14,18 @@ public class AdministrarProductos {
     public AdministrarProductos(String path) {
         archivo = new File(path);
     }
+
+    public String getArchivoNombre() {
+        return archivo.getPath();
+    }
+
+    public ArrayList<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(ArrayList<Producto> productos) {
+        this.productos = productos;
+    }
     
     public void escribirArchivo() throws IOException {
         FileWriter fw = null;

@@ -1,121 +1,126 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.7" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Container class="javax.swing.JDialog" name="cmd">
-      <Properties>
-        <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[650, 400]"/>
-        </Property>
-        <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[650, 400]"/>
-        </Property>
-      </Properties>
+    <Container class="javax.swing.JPopupMenu" name="pp_arbol">
 
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="bg_cmd" alignment="0" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="bg_cmd" alignment="0" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="bg_cmd">
+        <MenuItem class="javax.swing.JMenuItem" name="loadFile_ppItem">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="Load File"/>
           </Properties>
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="user_txt" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="552" max="-2" attributes="0"/>
-                      <EmptySpace pref="29" max="32767" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-                          <Component id="user_txt" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="306" max="32767" attributes="0"/>
-                  </Group>
-              </Group>
-            </DimensionLayout>
-          </Layout>
-          <SubComponents>
-            <Component class="javax.swing.JLabel" name="user_txt">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Roboto" size="14" style="1"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="cc" red="0" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="$master:"/>
-              </Properties>
-            </Component>
-            <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="0" green="0" red="0" type="rgb"/>
-                </Property>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="null"/>
-                </Property>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-              </AuxValues>
-
-              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-              <SubComponents>
-                <Component class="javax.swing.JTextArea" name="user_TA">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="0" red="0" type="rgb"/>
-                    </Property>
-                    <Property name="columns" type="int" value="20"/>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Roboto" size="12" style="0"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="0" green="cc" red="0" type="rgb"/>
-                    </Property>
-                    <Property name="rows" type="int" value="5"/>
-                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="null"/>
-                    </Property>
-                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Text Cursor"/>
-                    </Property>
-                  </Properties>
-                </Component>
-              </SubComponents>
-            </Container>
-          </SubComponents>
-        </Container>
+        </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="refreshTrees_ppItem">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Refresh Trees"/>
+          </Properties>
+        </MenuItem>
       </SubComponents>
     </Container>
+    <Container class="javax.swing.JPopupMenu" name="pp_tabla">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+      <SubComponents>
+        <MenuItem class="javax.swing.JMenuItem" name="clearTable_ppItem">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Clear Table"/>
+          </Properties>
+        </MenuItem>
+      </SubComponents>
+    </Container>
+    <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
+      <SubComponents>
+        <Menu class="javax.swing.JMenu" name="file_jmenu">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="File"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="newFile_menuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="New File"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="newFile_menuItemMouseClicked"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="importFile_menuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Import File"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="importFile_menuItemMouseClicked"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="window_jmenu">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Window"/>
+          </Properties>
+          <SubComponents>
+            <Menu class="javax.swing.JMenu" name="clear_jmenu">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Clear"/>
+              </Properties>
+              <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="clearCMD_menuItem">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Clear Command Line"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="clearCMD_menuItemMouseClicked"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="clearTable_menuItem">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Clear Table"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="clearTable_menuItemMouseClicked"/>
+                  </Events>
+                </MenuItem>
+              </SubComponents>
+            </Menu>
+            <MenuItem class="javax.swing.JMenuItem" name="refreshTree_menuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Refresh Tree"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="refreshTree_menuItemMouseClicked"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="help_jmenu">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Help"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="programStruc_menuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Program Structure"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="commands_menuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Commands"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+      </SubComponents>
+    </Menu>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
   <SyntheticProperties>
+    <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
@@ -134,13 +139,100 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="700" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jScrollPane1" min="-2" pref="170" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" pref="500" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="cmd_tf" min="-2" pref="549" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btn_enter" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="500" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="btn_enter" max="32767" attributes="0"/>
+                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="cmd_tf" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jScrollPane2" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JTextField" name="cmd_tf">
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_enter">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Enter"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_enterMouseClicked"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTree" name="jTree1">
+          <Properties>
+            <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
+              <TreeModel code=""/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTree1MouseClicked"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="jTable1">
+          <Properties>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="6" rowCount="4">
+                <Column editable="false" title="id" type="java.lang.Object"/>
+                <Column editable="false" title="name" type="java.lang.Object"/>
+                <Column editable="false" title="category" type="java.lang.Object"/>
+                <Column editable="false" title="price" type="java.lang.Object"/>
+                <Column editable="false" title="aisle" type="java.lang.Object"/>
+                <Column editable="false" title="bin" type="java.lang.Object"/>
+              </Table>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseClicked"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
 </Form>
