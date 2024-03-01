@@ -2,8 +2,6 @@ package carloslanza_lab7p2;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,6 +12,7 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
      */
     public CarlosLanza_Lab7P2() {
         initComponents();
+        limpiarTabla();
     }
 
     /**
@@ -46,16 +45,31 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
         clearTable_menuItem = new javax.swing.JMenuItem();
         refreshTree_menuItem = new javax.swing.JMenuItem();
         help_jmenu = new javax.swing.JMenu();
-        programStruc_menuItem = new javax.swing.JMenuItem();
+        productStruc_menuItem = new javax.swing.JMenuItem();
         commands_menuItem = new javax.swing.JMenuItem();
 
         loadFile_ppItem.setText("Load File");
+        loadFile_ppItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadFile_ppItemActionPerformed(evt);
+            }
+        });
         pp_arbol.add(loadFile_ppItem);
 
         refreshTrees_ppItem.setText("Refresh Trees");
+        refreshTrees_ppItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshTrees_ppItemActionPerformed(evt);
+            }
+        });
         pp_arbol.add(refreshTrees_ppItem);
 
         clearTable_ppItem.setText("Clear Table");
+        clearTable_ppItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearTable_ppItemActionPerformed(evt);
+            }
+        });
         pp_tabla.add(clearTable_ppItem);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -86,15 +100,7 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
             new String [] {
                 "id", "name", "category", "price", "aisle", "bin"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
@@ -105,17 +111,17 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
         file_jmenu.setText("File");
 
         newFile_menuItem.setText("New File");
-        newFile_menuItem.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                newFile_menuItemMouseClicked(evt);
+        newFile_menuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newFile_menuItemActionPerformed(evt);
             }
         });
         file_jmenu.add(newFile_menuItem);
 
         importFile_menuItem.setText("Import File");
-        importFile_menuItem.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                importFile_menuItemMouseClicked(evt);
+        importFile_menuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                importFile_menuItemActionPerformed(evt);
             }
         });
         file_jmenu.add(importFile_menuItem);
@@ -127,17 +133,17 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
         clear_jmenu.setText("Clear");
 
         clearCMD_menuItem.setText("Clear Command Line");
-        clearCMD_menuItem.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clearCMD_menuItemMouseClicked(evt);
+        clearCMD_menuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearCMD_menuItemActionPerformed(evt);
             }
         });
         clear_jmenu.add(clearCMD_menuItem);
 
         clearTable_menuItem.setText("Clear Table");
-        clearTable_menuItem.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clearTable_menuItemMouseClicked(evt);
+        clearTable_menuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearTable_menuItemActionPerformed(evt);
             }
         });
         clear_jmenu.add(clearTable_menuItem);
@@ -145,9 +151,9 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
         window_jmenu.add(clear_jmenu);
 
         refreshTree_menuItem.setText("Refresh Tree");
-        refreshTree_menuItem.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                refreshTree_menuItemMouseClicked(evt);
+        refreshTree_menuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshTree_menuItemActionPerformed(evt);
             }
         });
         window_jmenu.add(refreshTree_menuItem);
@@ -156,10 +162,20 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
 
         help_jmenu.setText("Help");
 
-        programStruc_menuItem.setText("Program Structure");
-        help_jmenu.add(programStruc_menuItem);
+        productStruc_menuItem.setText("Product Structure");
+        productStruc_menuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productStruc_menuItemActionPerformed(evt);
+            }
+        });
+        help_jmenu.add(productStruc_menuItem);
 
         commands_menuItem.setText("Commands");
+        commands_menuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                commands_menuItemActionPerformed(evt);
+            }
+        });
         help_jmenu.add(commands_menuItem);
 
         jMenuBar1.add(help_jmenu);
@@ -221,20 +237,13 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
                     cargarArboles();
                     break;
                 default: {
-                    JOptionPane.showMessageDialog(null, "Comando inválido");
+                    JOptionPane.showMessageDialog(this, "Comando inválido");
                 }
             }
         } catch(IOException e) {}
         
         cmd_tf.setText("");
     }//GEN-LAST:event_btn_enterMouseClicked
-
-    private void importFile_menuItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_importFile_menuItemMouseClicked
-        String texto = JOptionPane.showInputDialog(null, "Ingrese el archivo a importar: ");
-        try {
-            cargarTabla(texto);
-        } catch (IOException ex) {}
-    }//GEN-LAST:event_importFile_menuItemMouseClicked
 
     private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
        if (evt.isMetaDown()) {
@@ -248,27 +257,76 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void newFile_menuItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newFile_menuItemMouseClicked
-        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
-        if (model.getRowCount() > 0) {
-           String nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre del archivo: ");
-           ingresarProductos(nombre);
-        } else {
-            JOptionPane.showMessageDialog(null, "¡La tabla está vacía!");
-        }
-    }//GEN-LAST:event_newFile_menuItemMouseClicked
+    private void commands_menuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_commands_menuItemActionPerformed
+        String help = """
+                      COMANDOS:
+                      cargar archivo -> ./load {nombre}.txt
+                      crear archivo -> ./create {nombre}.txt -single
+                      limpiar tabla -> ./clear
+                      cargar arbol -> ./refresh
+                      """;
+        JOptionPane.showMessageDialog(this, help);
+    }//GEN-LAST:event_commands_menuItemActionPerformed
 
-    private void clearCMD_menuItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearCMD_menuItemMouseClicked
+    private void productStruc_menuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productStruc_menuItemActionPerformed
+        String help = """
+                   (1) id = identificador
+                   (2) name = nombre del producto
+                   (3) category = categoría del producto (0-9)
+                   (4) price = precio
+                   (5) aisle = numero de pasillo
+                   (6) bin = indica en que estante se encuentra el producto
+                   """;
+        JOptionPane.showMessageDialog(this, help);
+    }//GEN-LAST:event_productStruc_menuItemActionPerformed
+
+    private void clearCMD_menuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearCMD_menuItemActionPerformed
         cmd_tf.setText("");
-    }//GEN-LAST:event_clearCMD_menuItemMouseClicked
+    }//GEN-LAST:event_clearCMD_menuItemActionPerformed
 
-    private void clearTable_menuItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearTable_menuItemMouseClicked
+    private void clearTable_menuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearTable_menuItemActionPerformed
         limpiarTabla();
-    }//GEN-LAST:event_clearTable_menuItemMouseClicked
+    }//GEN-LAST:event_clearTable_menuItemActionPerformed
 
-    private void refreshTree_menuItemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshTree_menuItemMouseClicked
+    private void refreshTree_menuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshTree_menuItemActionPerformed
         cargarArboles();
-    }//GEN-LAST:event_refreshTree_menuItemMouseClicked
+    }//GEN-LAST:event_refreshTree_menuItemActionPerformed
+
+    private void newFile_menuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newFile_menuItemActionPerformed
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+            if (model.getRowCount() > 0) {
+               String nombre = JOptionPane.showInputDialog(this, "Ingrese el nombre del archivo: ");
+               ingresarProductos(nombre);
+            } else {
+                JOptionPane.showMessageDialog(this, "¡La tabla está vacía!");
+            }
+    }//GEN-LAST:event_newFile_menuItemActionPerformed
+
+    private void importFile_menuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importFile_menuItemActionPerformed
+        String texto = JOptionPane.showInputDialog(this, "Ingrese el archivo a importar: ");
+            try {
+                cargarTabla(texto);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, "¡No se encontró el archivo!");
+            }
+    }//GEN-LAST:event_importFile_menuItemActionPerformed
+
+    private void clearTable_ppItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearTable_ppItemActionPerformed
+        limpiarTabla();
+    }//GEN-LAST:event_clearTable_ppItemActionPerformed
+
+    private void refreshTrees_ppItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshTrees_ppItemActionPerformed
+        cargarArboles();
+    }//GEN-LAST:event_refreshTrees_ppItemActionPerformed
+
+    private void loadFile_ppItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadFile_ppItemActionPerformed
+        String texto = JOptionPane.showInputDialog(this, "Ingrese el archivo a importar: ");
+            try {
+                cargarTabla(texto);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, "¡No se encontró el archivo!");
+            }
+    }//GEN-LAST:event_loadFile_ppItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -346,7 +404,7 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
     
     private void limpiarTabla() {
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
-        model.setRowCount(0);
+        model.setRowCount(1);
         jTable1.setModel(model);
     }
     
@@ -392,7 +450,7 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
     private javax.swing.JMenuItem newFile_menuItem;
     private javax.swing.JPopupMenu pp_arbol;
     private javax.swing.JPopupMenu pp_tabla;
-    private javax.swing.JMenuItem programStruc_menuItem;
+    private javax.swing.JMenuItem productStruc_menuItem;
     private javax.swing.JMenuItem refreshTree_menuItem;
     private javax.swing.JMenuItem refreshTrees_ppItem;
     private javax.swing.JMenu window_jmenu;

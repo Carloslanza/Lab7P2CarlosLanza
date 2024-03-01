@@ -12,7 +12,7 @@ public class AdministrarProductos {
     private File archivo = null;
 
     public AdministrarProductos(String path) {
-        archivo = new File(path);
+        archivo = new File("./" + path);
     }
 
     public String getArchivoNombre() {
@@ -48,7 +48,7 @@ public class AdministrarProductos {
         fw.close();
     }
     
-    public void cargarArchivo() {
+    public void cargarArchivo() throws IOException {
         Scanner sc = null;
         productos = new ArrayList();
         if (archivo.exists()) {
@@ -68,6 +68,8 @@ public class AdministrarProductos {
             } catch (Exception ex) {
             }
             sc.close();
+        } else {
+            throw new IOException();
         }
     }
 }
