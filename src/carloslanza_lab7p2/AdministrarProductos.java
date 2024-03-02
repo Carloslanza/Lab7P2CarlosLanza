@@ -1,11 +1,12 @@
 package carloslanza_lab7p2;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class AdministrarProductos {
     private ArrayList<Producto> productos = new ArrayList<>();
@@ -16,7 +17,7 @@ public class AdministrarProductos {
     }
 
     public String getArchivoNombre() {
-        return archivo.getPath();
+        return archivo.getName();
     }
 
     public ArrayList<Producto> getProductos() {
@@ -34,10 +35,10 @@ public class AdministrarProductos {
             fw = new FileWriter(archivo, false);
             bw = new BufferedWriter(fw);
             
-            bw.write("id,name,category,price,aisle,bin");
+            bw.write("id,name,category,price,aisle,bin\n");
             for (Producto p : productos) {
                 bw.write(
-                        p.getId() + "," + p.getName() + "," + p.getCategory() + "," + 
+                        p.getId() + "," + p.getName() + "," + 
                                 p.getCategory() + "," + p.getPrice() + "," + p.getAisle() + "," + p.getBin() + "\n"
                  );
             }
@@ -48,28 +49,28 @@ public class AdministrarProductos {
         fw.close();
     }
     
+    
     public void cargarArchivo() throws IOException {
-        Scanner sc = null;
-        productos = new ArrayList();
         if (archivo.exists()) {
-            try {
-                sc = new Scanner(archivo);
-                sc.useDelimiter(",");
-                while (sc.hasNext()) {
-                    productos.add(new Producto(
-                            sc.nextInt(),
-                            sc.nextLine(),
-                            sc.nextInt(),
-                            sc.nextDouble(),
-                            sc.nextInt(),
-                            sc.nextInt()
-                    ));
-                }
-            } catch (Exception ex) {
+            BufferedReader reader = new BufferedReader(new FileReader(archivo));
+            String linea = reader.readLine();
+            while ((linea = reader.readLine()) != null) {
+                
+               String[] atributos;
+               atributos = linea.split(",");
+               
+               
+                Producto producto = new Producto(
+                    Integer.parseInt(atributos[0]),
+                    atributos[1],
+                    Integer.parseInt(atributos[2]),
+                    Double.parseDouble(atributos[3]),
+                    Integer.parseInt(atributos[4]),
+                    Integer.parseInt(atributos[5])
+                );
+                productos.add(producto);
             }
-            sc.close();
-        } else {
-            throw new IOException();
+            reader.close();
         }
     }
 }

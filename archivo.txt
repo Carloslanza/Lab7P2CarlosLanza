@@ -1,0 +1,2 @@
+id,name,category,price,aisle,bin
+1,hola,3,40.0,111,222

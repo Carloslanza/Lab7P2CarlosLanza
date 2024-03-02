@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
 
@@ -12,7 +14,6 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
      */
     public CarlosLanza_Lab7P2() {
         initComponents();
-        limpiarTabla();
     }
 
     /**
@@ -35,6 +36,7 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
         jTree1 = new javax.swing.JTree();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        btn_agregarRow = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         file_jmenu = new javax.swing.JMenu();
         newFile_menuItem = new javax.swing.JMenuItem();
@@ -81,7 +83,7 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("CSVs");
         jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jTree1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -92,21 +94,26 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
                 {null, null, null, null, null, null}
             },
             new String [] {
                 "id", "name", "category", "price", "aisle", "bin"
             }
         ));
+        jTable1.setShowVerticalLines(true);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(jTable1);
+
+        btn_agregarRow.setText("Agregar fila");
+        btn_agregarRow.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_agregarRowMouseClicked(evt);
+            }
+        });
 
         file_jmenu.setText("File");
 
@@ -192,7 +199,11 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btn_agregarRow))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cmd_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -209,9 +220,12 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
                         .addGap(1, 1, 1))
                     .addComponent(cmd_tf, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_agregarRow)))
                 .addGap(11, 11, 11))
         );
 
@@ -228,7 +242,13 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
                     cargarTabla(comandos[1]);
                     break;
                 case "./create":
-                    ingresarProductos(comandos[1]);
+                    if (comandos.length == 3) {
+                        if (comandos[2].equals("-single")) {
+                            ingresarProductos(comandos[1]);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "¡Comando incompleto!");
+                    }
                     break;
                 case "./clear":
                     limpiarTabla();
@@ -246,9 +266,29 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_enterMouseClicked
 
     private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
-       if (evt.isMetaDown()) {
+        if (evt.isMetaDown()) {
            pp_arbol.show(jTree1, evt.getX(), evt.getY());
-       }
+        } else {
+            int row = jTree1.getClosestRowForLocation(evt.getX(), evt.getY());
+            jTree1.setSelectionRow(row);
+            
+            DefaultMutableTreeNode node = 
+                    (DefaultMutableTreeNode)jTree1.getSelectionPath().getLastPathComponent();
+            
+            
+            String path = "";
+            for (AdministrarProductos csv : csvs) {
+                if(csv.getArchivoNombre().equals(node.getUserObject())) {
+                    path = csv.getArchivoNombre();
+                }
+            }
+            try {
+                cargarTabla(path);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, "¡No se encontró el archivo!");
+            }
+            
+        }
     }//GEN-LAST:event_jTree1MouseClicked
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -294,18 +334,20 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
 
     private void newFile_menuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newFile_menuItemActionPerformed
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        try {
             if (model.getRowCount() > 0) {
                String nombre = JOptionPane.showInputDialog(this, "Ingrese el nombre del archivo: ");
                ingresarProductos(nombre);
             } else {
                 JOptionPane.showMessageDialog(this, "¡La tabla está vacía!");
             }
+        } catch (IOException ex) {}
     }//GEN-LAST:event_newFile_menuItemActionPerformed
 
     private void importFile_menuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importFile_menuItemActionPerformed
         String texto = JOptionPane.showInputDialog(this, "Ingrese el archivo a importar: ");
             try {
-                cargarTabla(texto);
+                cargarTabla(texto + ".txt");
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(this, "¡No se encontró el archivo!");
             }
@@ -320,13 +362,25 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
     }//GEN-LAST:event_refreshTrees_ppItemActionPerformed
 
     private void loadFile_ppItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadFile_ppItemActionPerformed
-        String texto = JOptionPane.showInputDialog(this, "Ingrese el archivo a importar: ");
+        DefaultMutableTreeNode node = 
+                (DefaultMutableTreeNode)jTree1.getSelectionPath().getLastPathComponent();
+            
+        if (node.getUserObject() instanceof AdministrarProductos csv) {
             try {
-                cargarTabla(texto);
+                ingresarProductos(csv.getArchivoNombre());
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(this, "¡No se encontró el archivo!");
             }
+        }
     }//GEN-LAST:event_loadFile_ppItemActionPerformed
+
+    private void btn_agregarRowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_agregarRowMouseClicked
+        DefaultTableModel modelo = (DefaultTableModel)jTable1.getModel();
+        Object[] rowData = {"","","","","",""};
+        modelo.addRow(rowData);
+        
+        jTable1.setModel(modelo);
+    }//GEN-LAST:event_btn_agregarRowMouseClicked
 
     /**
      * @param args the command line arguments
@@ -364,14 +418,15 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
     }
     
     private void cargarTabla(String file) throws IOException {
-        adminProductos = new AdministrarProductos(file);
+        AdministrarProductos adminProductos = new AdministrarProductos(file);
         adminProductos.cargarArchivo();
         
         ArrayList<Producto> productos = adminProductos.getProductos();
         
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         
-        for (int i = 1; i < productos.size(); i++) {
+        model.setRowCount(0);
+        for (int i = 0; i < productos.size(); i++) {
             Producto producto = productos.get(i);
             Object[] rowData = {
                 producto.getId(),
@@ -385,52 +440,104 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
         }
         
         jTable1.setModel(model);
-        
         csvs.add(adminProductos);
     }
 
     
-    private void ingresarProductos(String nombre) {
+    private void ingresarProductos(String nombre) throws IOException {
         ArrayList<Producto> productos = new ArrayList<>();
-        adminProductos = new AdministrarProductos(nombre);
-        
+        AdministrarProductos adminProductos = new AdministrarProductos(nombre);
         
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
-        
         for (int i = 0; i < model.getRowCount(); i++) {
-            
+            Object[] rowData = new Object[6];
+            for (int j = 0; j < model.getColumnCount(); j++) {
+                rowData[j] = model.getValueAt(i, j);
+            }
+            Producto producto = validarProducto(rowData);
+            if (producto != null) {
+                productos.add(producto);
+            }
+        }
+        
+        if (!productos.isEmpty()) {
+            adminProductos.setProductos(productos);
+            adminProductos.escribirArchivo();
+
+            csvs.add(adminProductos);
+
+            JOptionPane.showMessageDialog(this, "¡Se ha guardado exitosamente!");
+        } else {
+            throw new IOException();
         }
     }
     
     private void limpiarTabla() {
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
-        model.setRowCount(1);
+        model.setRowCount(0);
+        Object[] rowData = {"","","","","",""};
+        model.addRow(rowData);
+        
         jTable1.setModel(model);
     }
     
     private void cargarArboles() {
+        DefaultTreeModel modelo = (DefaultTreeModel)jTree1.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode)modelo.getRoot();
+        raiz.removeAllChildren();
         
+        for (AdministrarProductos csv : csvs) {
+            DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(
+                    csv.getArchivoNombre()
+            );
+            raiz.add(nodo);
+        }
+        
+        modelo.reload();
     }
     
-    public static boolean validarName(String name) {
+    public Producto validarProducto(Object[] atributos) {
+        try {
+            int id = Integer.parseInt((String)atributos[0]);
+            String name = (String)atributos[1];
+            int category = Integer.parseInt((String)atributos[2]);
+            double price = Double.parseDouble((String)atributos[3]);
+            int aisle = Integer.parseInt((String)atributos[4]);
+            int bin = Integer.parseInt((String)atributos[5]);
+            
+            if (validarName(name) && validarCategory(category) && validarTresPosiciones(aisle)
+                && validarTresPosiciones(bin) && price >= 0 && id > 0) {
+                return new Producto(id, name, category, price, aisle, bin);
+            } else {
+                throw new Exception();
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "¡Hay un error en la tabla no se puede ingresar productos!");
+        }
+        
+        return null;
+    }
+    
+    public boolean validarName(String name) {
         name = name.toUpperCase();
         for (int i = 0; i < name.length(); i++) {
-            if (name.charAt(i) >= 65 && name.charAt(i) <= 90 || name.charAt(i) == 32) {
-                return true;
+            if (!(name.charAt(i) >= 65 && name.charAt(i) <= 90 || name.charAt(i) == 32)) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
     
-    public static boolean validarCategory(int category) {
+    public boolean validarCategory(int category) {
         return category >= 0 && category < 10;
     }
     
-    public static boolean validarTresPosiciones(int aisle) {
-        return aisle > 99 && aisle < 1000;
+    public boolean validarTresPosiciones(int numero) {
+        return numero > 99 && numero < 1000;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_agregarRow;
     private javax.swing.JButton btn_enter;
     private javax.swing.JMenuItem clearCMD_menuItem;
     private javax.swing.JMenuItem clearTable_menuItem;
@@ -456,6 +563,5 @@ public class CarlosLanza_Lab7P2 extends javax.swing.JFrame {
     private javax.swing.JMenu window_jmenu;
     // End of variables declaration//GEN-END:variables
 
-    private static AdministrarProductos adminProductos = null;
     private static ArrayList<AdministrarProductos> csvs = new ArrayList<>();
 }
